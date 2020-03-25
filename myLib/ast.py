@@ -26,6 +26,7 @@ class Fits:
             return self.hdu[0].data.astype(float)
         except Exception as expt:
             self.logger.log(expt)
+
     @property
     def header(self):
         try:
@@ -43,12 +44,11 @@ class Photometry:
 
     def mag(self, data, expt, ZMag=25):
         try:
-            data[data<=0] = 1
+            data[data <= 0] = 1
             print(data.min())
-            return -2.5 * log10(data/expt) + ZMag
+            return -2.5 * log10(data / expt) + ZMag
         except Exception as expt:
             self.logger.log(expt)
-
 
 class Image:
     def __init__(self, logger):
@@ -66,7 +66,7 @@ class Image:
                 if as_array:
                     return nar(Background(data, bw=bw))
 
-                return Background(self.data)
+                return Background(data)
             else:
                 self.logger.log("Bad dimensioned data")
         except Exception as expt:
@@ -163,7 +163,8 @@ class Image:
                     self.logger.log("Grayscale 3D Image")
                     other_grays = self.rgb2gray(other_rgb)
                     m, s = mean(other_grays), std(grays)
-                    ax2.imshow(other_grays, cmap=color2, interpolation='nearest', vmin=m - s, vmax=m + s, origin='lower')
+                    ax2.imshow(other_grays, cmap=color2, interpolation='nearest', vmin=m - s, vmax=m + s,
+                               origin='lower')
 
                 else:
                     self.logger.log("Show Colored")
