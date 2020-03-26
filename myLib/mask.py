@@ -2,12 +2,10 @@
 """
 @author: msh
 """
-from math import ceil
 
 from PIL.ImageDraw import Draw as PIDraw
 from PIL.Image import new as PInew
 
-from numpy import float64 as f64
 from numpy import ogrid
 from numpy import sqrt
 from numpy import power

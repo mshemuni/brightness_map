@@ -45,7 +45,6 @@ class Photometry:
     def mag(self, data, expt, ZMag=25):
         try:
             data[data <= 0] = 1
-            print(data.min())
             return -2.5 * log10(data / expt) + ZMag
         except Exception as expt:
             self.logger.log(expt)
